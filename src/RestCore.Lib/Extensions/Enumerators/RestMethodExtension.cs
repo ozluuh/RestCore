@@ -1,6 +1,6 @@
 using RestCore.Lib.Enumerators;
 
-namespace RestCore.Lib.Extensions.Enumerators;
+namespace RestCore.Lib.Extensions;
 
 public static class RestMethodExtension
 {
