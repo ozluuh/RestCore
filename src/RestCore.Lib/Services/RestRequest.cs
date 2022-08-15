@@ -9,17 +9,19 @@ public class RestRequest
     /// <summary>
     /// Define all client parameters (query, headers)
     /// </summary>
-    public readonly IEnumerable<(ParameterType _id, string key, IEnumerable<string> values)> Parameters;
+    public readonly List<(ParameterType _id, string key, IEnumerable<string> values)> Parameters;
     public RequestBody? Body { get; private set; }
-    public Uri? RequestUri { get; set; }
+    public readonly Uri RequestUri;
     public RestMethod Method { get; set; }
 
     /// <summary>
     /// Initializes a new instance of the RestCore.Lib.RestRequest class.
     /// </summary>
-    public RestRequest()
+    /// <param name="requestUri">Request uri.</param>
+    public RestRequest(string requestUri)
     {
         Parameters = new List<(ParameterType, string, IEnumerable<string>)>();
+        RequestUri = new Uri(requestUri);
     }
 
     /// <summary>
@@ -30,7 +32,7 @@ public class RestRequest
     /// <param name="parameterType">Which parameter type must adopt in requisition</param>
     public void AddParameter(string key, IEnumerable<string> values, ParameterType parameterType)
     {
-        Parameters.Append((parameterType, key, values));
+        Parameters.Add((parameterType, key, values));
     }
 
     /// <summary>

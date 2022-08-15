@@ -26,16 +26,15 @@ public static class RestRequestExtension
 
     private static Uri? GetRequestUri(RestRequest request)
     {
-        if (!request.Parameters.Any(item => item._id.Equals(ParameterType.Query)))
+        var parameters = request.Parameters.Where(item => item._id.Equals(ParameterType.Query)).ToList();
+
+        if (!parameters.Any())
             return request.RequestUri;
 
-        var query = request.Parameters
-            .Where(item => item._id.Equals(ParameterType.Query))
-            .Select(p => string.Format("{0}={1}", p.key, string.Join(',', p.values)));
+        var query = parameters
+            .Select(p => string.Format("{0}={1}", p.key, p.values.Union(',')))
+            .Union("&");
 
-        var queryNormalized = string.Join('&', query);
-        var requestUri = request.RequestUri?.OriginalString;
-
-        return new Uri(string.Join('?', requestUri, queryNormalized));
+        return new Uri(request.RequestUri.AbsoluteUri.Union("?", query));
     }
 }

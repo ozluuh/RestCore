@@ -6,18 +6,15 @@ namespace RestCore.Lib;
 public class RestClient
 {
     private readonly IHttpClientFactory _factory;
-    public Uri? BaseAddress { get; set; }
 
-    public RestClient(Uri? baseAddress = null)
+    public RestClient()
     {
         _factory = ServiceProviderHelper.GetService<IHttpClientFactory>()!;
-        BaseAddress = baseAddress;
     }
 
     private HttpClient ConfigureClient()
     {
         var client = _factory.CreateClient();
-        client.BaseAddress = BaseAddress;
         client.DefaultRequestHeaders.Clear();
 
         return client;
