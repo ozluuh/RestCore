@@ -9,8 +9,10 @@ public class RestRequest
     /// <summary>
     /// Define all client parameters (query, headers)
     /// </summary>
-    private readonly IEnumerable<(ParameterType _id, string key, IEnumerable<string> values)> Parameters;
+    public readonly IEnumerable<(ParameterType _id, string key, IEnumerable<string> values)> Parameters;
     public RequestBody? Body { get; private set; }
+    public Uri? RequestUri { get; set; }
+    public RestMethod Method { get; set; }
 
     /// <summary>
     /// Initializes a new instance of the RestCore.Lib.RestRequest class.
