@@ -12,7 +12,7 @@ public class RestClient
         _factory = ServiceProviderHelper.GetService<IHttpClientFactory>()!;
     }
 
-    private HttpClient ConfigureClient()
+    private HttpClient CreateClient()
     {
         var client = _factory.CreateClient();
         client.DefaultRequestHeaders.Clear();
@@ -20,11 +20,11 @@ public class RestClient
         return client;
     }
 
-    public async Task SendAsync(RestRequest? request = null)
+    public Task<HttpResponseMessage> SendAsync(RestRequest? request = null)
     {
-        var client = ConfigureClient();
+        var client = CreateClient();
         var message = request.GetRequestMessage();
 
-        var response = await client.SendAsync(message);
+        return client.SendAsync(message);
     }
 }
