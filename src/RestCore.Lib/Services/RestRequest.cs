@@ -2,7 +2,7 @@ using System.Text;
 using RestCore.Lib.Enumerators;
 using RestCore.Lib.Models;
 
-namespace RestCore.Lib;
+namespace RestCore;
 
 public class RestRequest
 {

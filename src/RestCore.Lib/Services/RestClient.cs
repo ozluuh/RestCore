@@ -1,7 +1,7 @@
 using RestCore.Lib.Extensions;
 using RestCore.Lib.Helpers;
 
-namespace RestCore.Lib;
+namespace RestCore;
 
 public class RestClient
 {
