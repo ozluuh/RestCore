@@ -1,6 +1,8 @@
+using System.Text;
 using RestCore.Lib.Enumerators;
+using RestCore.Lib.Models;
 
-namespace RestCore.Lib.Services;
+namespace RestCore.Lib;
 
 public class RestRequest
 {
@@ -8,9 +10,10 @@ public class RestRequest
     /// Define all client parameters (query, headers)
     /// </summary>
     private readonly IEnumerable<(ParameterType _id, string key, IEnumerable<string> values)> Parameters;
+    public RequestBody? Body { get; private set; }
 
     /// <summary>
-    /// Instantiate RestRequest object
+    /// Initializes a new instance of the RestCore.Lib.RestRequest class.
     /// </summary>
     public RestRequest()
     {
@@ -36,4 +39,15 @@ public class RestRequest
     /// <param name="parameterType">Which parameter type must adopt in requisition</param>
     public void AddParameter(string key, string value, ParameterType parameterType)
     => AddParameter(key, new[] { value }, parameterType);
+
+    /// <summary>
+    /// Add request body.
+    /// </summary>
+    /// <param name="content">Content body.</param>
+    /// <param name="encode">Encoding to adopt. Default to UTF8.</param>
+    /// <param name="mediaType">Content type. Default to application/json.</param>
+    public void AddRequestBody(string content, Encoding? encode = null, string? mediaType = null)
+    {
+        Body = new RequestBody(content, encode, mediaType);
+    }
 }
