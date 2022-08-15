@@ -23,4 +23,9 @@ public sealed class RequestBody
     {
         return $"Encode: {Encode.EncodingName}, Content-Type: {MediaType}, Content: {Content}";
     }
+
+    internal HttpContent? GetHttpContent()
+    {
+        return new StringContent(this.Content, this.Encode, this.MediaType);
+    }
 }
