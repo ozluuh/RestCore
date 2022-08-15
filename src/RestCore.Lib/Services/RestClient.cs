@@ -1,4 +1,3 @@
-using RestCore.Lib.Enumerators;
 using RestCore.Lib.Extensions;
 using RestCore.Lib.Helpers;
 
