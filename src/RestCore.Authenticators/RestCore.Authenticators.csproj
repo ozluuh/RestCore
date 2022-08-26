@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<IsPackable>true</IsPackable>
+		<PackageId>RestCore.Authenticators</PackageId>
+		<Version>0.0.1-alpha</Version>
+		<Company>Luís Paulino</Company>
+		<Authors>Luís Paulino</Authors>
+		<Title>RestCore Authenticators</Title>
+		<Description>Package with default Authenticators.</Description>
+		<PackageProjectUrl>https://github.com/ozluuh/RestCore</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/ozluuh/RestCore</RepositoryUrl>
+		<RepositoryType>Git</RepositoryType>
+	</PropertyGroup>
+
+</Project>
