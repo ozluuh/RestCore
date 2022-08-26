@@ -1,6 +1,6 @@
-using RestCore.Lib.Enumerators;
+using RestCore.Enumerators;
 
-namespace RestCore.Lib.Extensions;
+namespace RestCore.Extensions;
 
 internal static class RestRequestExtension
 {

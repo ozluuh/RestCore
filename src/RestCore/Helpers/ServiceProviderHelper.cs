@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace RestCore.Lib.Helpers;
+namespace RestCore.Helpers;
 
 public static class ServiceProviderHelper
 {

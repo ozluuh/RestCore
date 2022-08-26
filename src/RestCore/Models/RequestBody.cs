@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace RestCore.Lib.Models;
+namespace RestCore.Models;
 
 public sealed class RequestBody
 {

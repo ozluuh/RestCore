@@ -1,5 +1,5 @@
-using RestCore.Lib.Extensions;
-using RestCore.Lib.Helpers;
+using RestCore.Extensions;
+using RestCore.Helpers;
 
 namespace RestCore;
 

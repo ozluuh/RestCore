@@ -1,4 +1,4 @@
-namespace RestCore.Lib.Extensions;
+namespace RestCore.Extensions;
 
 public static class GeneralExtension
 {

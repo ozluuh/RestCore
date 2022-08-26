@@ -1,6 +1,6 @@
 using System.Text;
-using RestCore.Lib.Enumerators;
-using RestCore.Lib.Models;
+using RestCore.Enumerators;
+using RestCore.Models;
 
 namespace RestCore;
 
@@ -15,7 +15,7 @@ public class RestRequest
     public RestMethod Method { get; set; }
 
     /// <summary>
-    /// Initializes a new instance of the RestCore.Lib.RestRequest class.
+    /// Initializes a new instance of the RestCore.RestRequest class.
     /// </summary>
     /// <param name="resourceUri">Requested resource.</param>
     /// <param name="httpMethod">Http method.</param>
