@@ -19,7 +19,7 @@ public class RestRequest
     /// </summary>
     /// <param name="resourceUri">Requested resource.</param>
     /// <param name="httpMethod">Http method.</param>
-    public RestRequest(string resourceUri, RestMethod? httpMethod)
+    public RestRequest(string resourceUri, RestMethod? httpMethod = null)
     {
         Parameters = new List<(ParameterType, string, IEnumerable<string>)>();
         ResourceUri = resourceUri;
