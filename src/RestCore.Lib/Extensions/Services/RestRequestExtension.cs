@@ -2,9 +2,9 @@ using RestCore.Lib.Enumerators;
 
 namespace RestCore.Lib.Extensions;
 
-public static class RestRequestExtension
+internal static class RestRequestExtension
 {
-    public static HttpRequestMessage GetRequestMessage(this RestRequest? request)
+    internal static HttpRequestMessage GetRequestMessage(this RestRequest? request, Uri baseAddress)
     {
         var message = new HttpRequestMessage();
 
@@ -12,29 +12,32 @@ public static class RestRequestExtension
         {
             message.Content = request.Body?.GetHttpContent();
             message.Method = request.Method.GetHttpMethod();
-            message.RequestUri = GetRequestUri(request);
+            message.RequestUri = request.GetRequestUri(baseAddress);
 
             foreach (var header in request.Parameters.Where(item => item._id.Equals(ParameterType.RequestHeader)))
-                message.Headers.Add(header.key, header.values);
+                message.Headers.TryAddWithoutValidation(header.key, header.values);
 
             foreach (var header in request.Parameters.Where(item => item._id.Equals(ParameterType.ContentHeader)))
-                message.Content?.Headers.Add(header.key, header.values);
+                message.Content?.Headers.TryAddWithoutValidation(header.key, header.values);
         }
 
         return message;
     }
 
-    private static Uri? GetRequestUri(RestRequest request)
+    internal static Uri GetRequestUri(this RestRequest request, Uri baseAddress)
     {
         var parameters = request.Parameters.Where(item => item._id.Equals(ParameterType.Query)).ToList();
+        var uriString = string.Join("", baseAddress.AbsoluteUri, request.ResourceUri);
 
-        if (!parameters.Any())
-            return request.RequestUri;
+        if (parameters.Any())
+        {
+            var query = parameters
+                .Select(p => string.Format("{0}={1}", p.key, p.values.Union(',')))
+                .Union("&");
 
-        var query = parameters
-            .Select(p => string.Format("{0}={1}", p.key, p.values.Union(',')))
-            .Union("&");
+            uriString = uriString.Union("?", query);
+        }
 
-        return new Uri(request.RequestUri.AbsoluteUri.Union("?", query));
+        return new Uri(uriString);
     }
 }

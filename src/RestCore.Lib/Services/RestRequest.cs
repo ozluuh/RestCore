@@ -9,19 +9,21 @@ public class RestRequest
     /// <summary>
     /// Define all client parameters (query, headers)
     /// </summary>
-    public readonly List<(ParameterType _id, string key, IEnumerable<string> values)> Parameters;
+    public List<(ParameterType _id, string key, IEnumerable<string> values)> Parameters { get; private set; }
     public RequestBody? Body { get; private set; }
-    public readonly Uri RequestUri;
+    public readonly string ResourceUri;
     public RestMethod Method { get; set; }
 
     /// <summary>
     /// Initializes a new instance of the RestCore.Lib.RestRequest class.
     /// </summary>
-    /// <param name="requestUri">Request uri.</param>
-    public RestRequest(string requestUri)
+    /// <param name="resourceUri">Requested resource.</param>
+    /// <param name="httpMethod">Http method.</param>
+    public RestRequest(string resourceUri, RestMethod? httpMethod = null)
     {
         Parameters = new List<(ParameterType, string, IEnumerable<string>)>();
-        RequestUri = new Uri(requestUri);
+        ResourceUri = resourceUri;
+        Method = httpMethod ?? RestMethod.Get;
     }
 
     /// <summary>
