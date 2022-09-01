@@ -1,4 +1,4 @@
-namespace RestCore.Lib.Enumerators;
+namespace RestCore.Enumerators;
 
 public enum RestMethod
 {

@@ -1,5 +1,7 @@
-using RestCore.Lib.Extensions;
-using RestCore.Lib.Helpers;
+using Microsoft.Net.Http.Headers;
+using RestCore.Contracts.Authenticators;
+using RestCore.Extensions;
+using RestCore.Helpers;
 
 namespace RestCore;
 
@@ -7,6 +9,7 @@ public class RestClient
 {
     private readonly IHttpClientFactory _factory;
     public readonly Uri BaseAddress;
+    public IAuthenticator? Authenticator { get; set; }
 
     public RestClient(string uri)
     {
@@ -26,6 +29,14 @@ public class RestClient
     {
         var client = CreateClient();
         var message = request.GetRequestMessage(BaseAddress);
+
+        if (Authenticator != null)
+        {
+            var authentication = Authenticator.HandleAuthentication();
+
+            if (authentication.IsCompleted)
+                message.Headers.TryAddWithoutValidation(HeaderNames.Authorization, authentication.Result);
+        }
 
         return client.SendAsync(message);
     }
